@@ -1,0 +1,31 @@
+{% extends "booking/base.html" %}
+{% block title %}My Appointments{% endblock %}
+
+{% block content %}
+<h2>My Appointments</h2>
+
+{% if appts %}
+<table>
+    <tr>
+        <th>Provider</th><th>Starts</th><th>Ends</th><th>Status</th><th>Actions</th>
+    </tr>
+    {% for a in appts %}
+    <tr>
+        <td>{{ a.provider.name }}</td>
+        <td>{{ a.starts_at }}</td>
+        <td>{{ a.ends_at }}</td>
+        <td>{{ a.status }}</td>
+        <td>
+            {% if a.status != "CANCELED" %}
+                <a href="{% url 'reschedule_appointment' a.pk %}">Reschedule</a> |
+                <a href="{% url 'cancel_appointment' a.pk %}">Cancel</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No appointments yet.</p>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,16 @@
+<!doctype html>
+<html><body>
+  <h2>Reschedule Appointment #{{ appt.id }}</h2>
+
+  {% for m in messages %}
+    <p style="color:{% if m.level_tag == 'error' %}red{% else %}green{% endif %};">{{ m }}</p>
+  {% endfor %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Save</button>
+  </form>
+
+  <p><a href="{% url 'my_appointments' %}">Back</a></p>
+</body></html>

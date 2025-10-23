@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Patient Scheduler{% endblock %}</title>
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <header class="topbar">
+    <h1>Patient Scheduler</h1>
+    <nav>
+      <ul class="menu">
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'book' %}">Book Appointment</a></li>
+        <li><a href="{% url 'my_appointments' %}">My Appointments</a></li>
+        <li>
+          <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% if messages %}
+      {% for m in messages %}
+        <p style="color:{% if m.level_tag == 'error' %}red{% else %}green{% endif %};">
+          {{ m }}
+        </p>
+      {% endfor %}
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">© 2025 Patient Scheduler</footer>
+</body>
+</html>
+
+

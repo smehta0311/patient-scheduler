@@ -1,0 +1,148 @@
+/* ===== Base Page Setup ===== */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6fa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ===== Headers ===== */
+h1,
+h2,
+h3 {
+    color: #2a4d8f;
+    margin-bottom: 10px;
+}
+
+/* ===== Form Styling ===== */
+form {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* ===== Buttons ===== */
+button {
+    background-color: #2a4d8f;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1d3461;
+}
+
+/* ===== Messages ===== */
+p {
+    padding: 8px;
+    border-radius: 4px;
+}
+
+p[style*="green"] {
+    background-color: #e8f6ee;
+    color: #2e7d32;
+}
+
+p[style*="red"] {
+    background-color: #fdecea;
+    color: #c62828;
+}
+
+/* ===== Tables ===== */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #2a4d8f;
+    color: white;
+}
+
+/* ===== Links ===== */
+a {
+    color: #2a4d8f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Dashboard Links ===== */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar h1 {
+    margin: 0 0 10px 0;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    margin-top: 16px;
+}
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #666;
+}

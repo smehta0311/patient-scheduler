@@ -1,0 +1,45 @@
+{% extends "booking/base.html" %}
+
+{% block content %}
+<h2>My Patient Appointments</h2>
+
+{% if appts %}
+<table>
+    <tr>
+        <th>Patient</th>
+        <th>Starts</th>
+        <th>Ends</th>
+        <th>Reason</th>   {# <-- NEW COLUMN HEADER #}
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for a in appts %}
+    <tr>
+        <td>{{ a.patient.username }}</td>
+        <td>{{ a.starts_at }}</td>
+        <td>{{ a.ends_at }}</td>
+
+        {# NEW: show the reason the patient entered #}
+        <td>
+            {{ a.reason|default:"—" }}
+        </td>
+
+        <td>{{ a.status }}</td>
+        <td>
+            {% if a.status != "CANCELED" %}
+                <a href="{% url 'provider_reschedule_appointment' a.pk %}">Reschedule</a> |
+                <a href="{% url 'provider_cancel_appointment' a.pk %}">Cancel</a>
+            {% else %}
+                —
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No appointments booked with you yet.</p>
+{% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,47 @@
+{% extends "booking/base.html" %}
+
+{% block title %}Reschedule Appointment · Patient Scheduler{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h2>Reschedule Appointment</h2>
+        <p class="page-subtitle">
+            Adjust the provider or time for this visit. Your current booking details are shown below.
+        </p>
+    </div>
+</div>
+
+<div class="current-appt">
+    <span class="label">Current time:</span>
+    {{ appt.starts_at|date:"M. j, Y, g:i a" }}
+    &nbsp;→&nbsp;
+    {{ appt.ends_at|date:"M. j, Y, g:i a" }}
+</div>
+
+<div class="page-layout-center">
+    <div class="card narrow-card">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.provider.id_for_label }}">Provider:</label>
+                {{ form.provider }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.starts_at.id_for_label }}">Starts at:</label>
+                {{ form.starts_at }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.ends_at.id_for_label }}">Ends at:</label>
+                {{ form.ends_at }}
+            </div>
+
+            <button type="submit">Save changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

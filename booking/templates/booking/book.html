@@ -1,0 +1,163 @@
+{% extends "booking/base.html" %}
+{% block content %}
+
+<div style="max-width: 960px; margin: 0 auto;">
+
+    <!-- Page heading -->
+    <header style="margin-bottom: 24px;">
+        <h2 style="margin-bottom: 6px;">Book Appointment</h2>
+        <p style="margin: 0; color: #555;">
+            Choose a provider and time that works best for you.
+        </p>
+    </header>
+
+    <!-- Main layout: form on the left, info on the right -->
+    <div style="
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+        gap: 28px;
+        align-items: flex-start;
+    ">
+
+        <!-- Appointment card -->
+        <section style="
+            background: #ffffff;
+            padding: 24px 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+        ">
+            <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 20px;">
+                Appointment details
+            </h3>
+
+            {% if messages %}
+                {% for m in messages %}
+                    <p style="
+                        margin: 0 0 12px 0;
+                        padding: 10px 12px;
+                        border-radius: 6px;
+                        font-size: 14px;
+                        background-color: {% if m.level_tag == 'error' %}#fdecea{% else %}#e8f6ee{% endif %};
+                        color: {% if m.level_tag == 'error' %}#c62828{% else %}#2e7d32{% endif %};
+                    ">
+                        {{ m }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+
+                    <!-- Provider -->
+                    <div>
+                        <label for="{{ form.provider.id_for_label }}" style="font-weight: 600;">
+                            {{ form.provider.label }}:
+                        </label>
+                        {{ form.provider }}
+                        {% if form.provider.errors %}
+                            <div style="color: #c62828; font-size: 13px; margin-top: 4px;">
+                                {{ form.provider.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Starts at -->
+                    <div>
+                        <label for="{{ form.starts_at.id_for_label }}" style="font-weight: 600;">
+                            {{ form.starts_at.label }}:
+                        </label>
+                        {{ form.starts_at }}
+                        {% if form.starts_at.errors %}
+                            <div style="color: #c62828; font-size: 13px; margin-top: 4px;">
+                                {{ form.starts_at.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Ends at -->
+                    <div>
+                        <label for="{{ form.ends_at.id_for_label }}" style="font-weight: 600;">
+                            {{ form.ends_at.label }}:
+                        </label>
+                        {{ form.ends_at }}
+                        {% if form.ends_at.errors %}
+                            <div style="color: #c62828; font-size: 13px; margin-top: 4px;">
+                                {{ form.ends_at.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Reason for appointment -->
+                    <div>
+                        <label for="id_reason" style="font-weight: 600;">
+                            Reason for appointment:
+                        </label>
+
+                        {{ form.reason }}
+
+                        {% if form.reason.errors %}
+                            <div style="color: #c62828; font-size: 13px; margin-top: 4px;">
+                                {{ form.reason.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <button type="submit" style="
+                    margin-top: 20px;
+                    background-color: #2a4d8f;
+                    color: #fff;
+                    border: none;
+                    padding: 10px 18px;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: background-color 0.2s ease;
+                ">
+                    Book
+                </button>
+            </form>
+        </section>
+
+        <!-- Helpful info / sidebar -->
+        <aside style="font-size: 14px; color: #555;">
+
+            <div style="
+                background: #eef2ff;
+                border-radius: 10px;
+                padding: 18px 20px;
+                margin-bottom: 18px;
+            ">
+                <h4 style="margin: 0 0 8px 0; color: #2a4d8f;">Before you book</h4>
+                <ul style="margin: 0; padding-left: 18px;">
+                    <li>Double-check the date and time before confirming.</li>
+                    <li>Choose the provider that best matches your needs.</li>
+                    <li>If something changes, you can always reschedule.</li>
+                </ul>
+            </div>
+
+            <div style="
+                background: #ffffff;
+                border-radius: 10px;
+                padding: 16px 20px;
+                box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+            ">
+                <h4 style="margin: 0 0 6px 0;">Manage existing appointments</h4>
+                <p style="margin: 0 0 6px 0;">
+                    Already have an appointment booked? You can review, reschedule,
+                    or cancel from the
+                    <a href="{% url 'my_appointments' %}" style="color: #2a4d8f; font-weight: 600;">
+                        My Appointments
+                    </a>
+                    page.
+                </p>
+            </div>
+
+        </aside>
+    </div>
+</div>
+
+{% endblock %}

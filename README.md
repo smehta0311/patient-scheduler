@@ -1,130 +1,169 @@
-The Patient Scheduler is a Django-based appointment management system that allows patients to book, reschedule, and cancel appointments with available healthcare providers. It provides an intuitive, secure interface for users to manage appointments efficiently.
+🩺 Patient Appointment Scheduler
 
-# Features
+A full-stack Django web application for managing patient appointments with healthcare providers. Patients can book, reschedule, or cancel appointments, while providers can view and manage their scheduled visits. The system includes modern UI styling, strong validation, and clear user workflows.
 
-- User Authentication
+📌 Overview
 
-- Secure login/logout functionality using Django’s authentication system.
+- The Patient Appointment Scheduler helps streamline booking workflows by providing:
 
-- Separate access for patients and providers.
+- A clean and user-friendly interface
 
-- Appointment Management
+- Full patient and provider functionality
 
-- Book available time slots with specific providers.
+- Time validation and conflict detection
 
-- Prevents overlapping appointments.
+- Professional-grade UI components with polished styling
 
-- Allows patients to reschedule or cancel their bookings.
+🚀 Features
 
-- Displays upcoming and past appointments in a clean, simple dashboard.
+👤 Patient Features
 
-- Provider Management
+- Create an account and log in
 
-- Admins can add healthcare providers and define their availability schedules via the Django admin panel.
+- Book appointments with a selected provider
 
-- Each provider can have multiple availability windows.
+- Select date & time using Flatpickr
 
-- Responsive UI
+- Add a reason for the appointment
 
-- Organized interface with consistent navigation and visual feedback.
+- View all appointments in a clean table layout
 
-- Custom CSS for a modern, professional look.
+- Reschedule or cancel active bookings
 
-| Category        | Tools / Frameworks        |
-| --------------- | ------------------------- |
-| Backend         | Django 5.2.7 (Python)     |
-| Frontend        | HTML5, CSS3               |
-| Database        | SQLite (default)          |
-| IDE             | Visual Studio Code        |
-| Version Control | Git & GitHub              |
-| Deployment      | Localhost / AWS EC2-ready |
+System prevents:
 
+- Double-booking with the same provider
 
-# Installation and Setup
+- Booking in the past
 
- 1. Clone the repository
-    
-    git clone https://github.com/yourusername/patient-scheduler.git
-    cd patient-scheduler
+- End time earlier than start time
 
- 2. Create a virtual environment
-    
-    python -m venv venv
-    venv\Scripts\activate   # Windows
-    source venv/bin/activate   # macOS/Linux
+- Overlapping appointments
 
- 3. Install dependencies
-    
-    pip install Django asgiref sqlparse tzdata
+🩺 Provider Features
 
- 4. Run migrations
-    
-    python manage.py makemigrations
-    python manage.py migrate
+- Log in to access the Provider Dashboard
 
- 5. Create a superuser
-     
-    python manage.py createsuperuser
+- View all assigned patient appointments
 
- 6. Run the development server
-     
-    python manage.py runserver
+- See appointment reasons
 
+- Reschedule or cancel appointments
 
-# How It Works
+- Canceled/expired appointments appear visually dimmed
 
-1. Admin Login:
-Admins create providers and define their available time slots in Django Admin.
+🎨 UI / UX Highlights
 
-2. Patient Login:
-Patients log in, navigate to the Dashboard, and book an appointment.
+- Modern pill-shaped navigation buttons
 
-3. Validation:
-The system prevents overlapping times and ensures providers are available.
+- Distinct color-coded buttons (blue, light-blue, purple)
 
-4. Management:
-Patients can reschedule or cancel existing appointments directly from their dashboard.
+- Centered dashboard card layout
 
-# Folder Structure
+Styled tables with:
 
+- Zebra striping
+
+- Status badges (BOOKED, RESCHEDULED, CANCELED)
+
+- Action links
+
+- Helpful empty states and clearer messages across the app
+
+🔐 Validation & System Logic
+
+The system includes strong booking validation:
+
+- Disallows booking past dates
+
+- Ensures end time > start time
+
+- Blocks appointments overlapping with existing provider slots
+
+- Prevents double-booking during reschedule
+
+- Provides clear success and error messages
+
+🛠️ Tech Stack
+Backend
+
+- Python 3.x
+
+- Django Framework
+
+- SQLite (for development)
+
+- Frontend
+
+- HTML, CSS (custom stylesheet)
+
+- Flatpickr (datetime picker)
+
+Tools
+
+- Visual Studio Code
+
+- Git & GitHub
+
+📂 Project Structure
 ```
-PATIENT-SCHEDULER/
+patient-scheduler/
 │
-├── booking/                     # Core Django app
-│   ├── migrations/              # Database migration files
-│   ├── templates/booking/       # HTML templates
-│   ├── static/booking/          # (optional) app-level static files
-│   ├── admin.py                 # Admin registration
-│   ├── apps.py
-│   ├── forms.py                 # Appointment forms
-│   ├── models.py                # Provider, Availability, Appointment
-│   ├── urls.py                  # App-specific URL routing
-│   ├── views.py                 # Booking, cancel, reschedule views
+├── booking/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   ├── urls.py
+│   ├── templates/booking/
+│   └── static/css/style.css
 │
-├── scheduler/                   # Project configuration
-│   ├── __init__.py
-│   ├── settings.py              # Main Django settings
-│   ├── urls.py                  # Root URL mapping
-│   ├── wsgi.py
+├── scheduler/
+│   ├── settings.py
+│   └── urls.py
 │
-├── static/css/                  # Global static folder for styles
-│   └── style.css
-│
-├── templates/registration/      # Login and logout templates
-│   └── login.html
-│
-├── db.sqlite3                   # Local database
-├── manage.py                    # Django management script
-├── requirements.txt             # Python dependencies
-└── README.md                    # Project documentation
+├── db.sqlite3
+├── manage.py
+└── README.md
 ```
 
-# Contributors
+🧪 Running the Project Locally
 
-Sid Mehta – Developer
-Southern Illinois University, IT & Cybersecurity
-   
+1. Clone the repository:
+git clone https://github.com/smehta0311/patient-scheduler.git
+cd patient-scheduler
+
+2. Create and activate a virtual environment:
+python -m venv venv
+venv\Scripts\activate
+
+3. Install dependencies:
+ pip install -r requirements.txt
+
+4. Apply migrations:
+ python manage.py migrate
+
+5. Run the development server:
+python manage.py runserver
+
+6. Open the app:
+http://127.0.0.1:8000/
+
+👤 User Role Summary
+
+Patient: Books, views, reschedules, and cancels their own appointments.
+
+Provider: Views all appointments booked with them. Can reschedule or cancel patient appointments.
+
+📜 License
+
+This project is for academic and educational use as part of a senior capstone project.
+
+🙌 Acknowledgements
+
+Developed as part of a senior project showcasing full-stack development, system design, user experience principles, and real-world validation logic using Django.
 
 
 
 
+
+Git & GitHub

@@ -12,58 +12,66 @@
     </div>
 </div>
 
-<div class="card">
-    {% if appts %}
-        <table class="appt-table">
-            <thead>
-                <tr>
-                    <th>Provider</th>
-                    <th>Starts</th>
-                    <th>Ends</th>
-                    <th>Reason</th>
-                    <th>Status</th>
-                    <th class="actions-col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for appt in appts %}
-                    <tr class="{% if appt.status == 'CANCELED' %}row-cancelled{% endif %}">
-                        <td>{{ appt.provider.name }}</td>
-                        <td>{{ appt.starts_at|date:"M. j, Y, g:i a" }}</td>
-                        <td>{{ appt.ends_at|date:"M. j, Y, g:i a" }}</td>
-                        <td>{{ appt.reason|default:"—" }}</td>
-                        <td>
-                            <span class="status-pill status-{{ appt.status|lower }}">
-                                {{ appt.get_status_display }}
-                            </span>
-                        </td>
-                        <td class="actions-cell">
-                            {% if appt.status == 'BOOKED' or appt.status == 'RESCHEDULED' %}
-                                <a href="{% url 'reschedule_appointment' appt.pk %}" class="link-action">
-                                    Reschedule
-                                </a>
-                                <span class="action-divider">•</span>
-                                <a href="{% url 'cancel_appointment' appt.pk %}" class="link-action link-danger">
-                                    Cancel
-                                </a>
-                            {% else %}
-                                <span class="muted">—</span>
-                            {% endif %}
-                        </td>
+<!-- Center the card -->
+<div class="page-layout-center">
+    <div class="card" style="width: 100%; max-width: 1100px;">
+
+        {% if appts %}
+            <table class="appt-table">
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Starts</th>
+                        <th>Ends</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th class="actions-col">Actions</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <div class="empty-state">
-            <h3>No appointments yet</h3>
-            <p>
-                When you book an appointment, it will appear here. You can get started by
-                booking your first visit.
-            </p>
-            <a href="{% url 'book' %}" class="primary-btn">Book an appointment</a>
-        </div>
-    {% endif %}
+                </thead>
+                <tbody>
+                    {% for appt in appts %}
+                        <tr class="{% if appt.status == 'CANCELED' %}row-cancelled{% endif %}">
+                            <td>{{ appt.provider.name }}</td>
+                            <td>{{ appt.starts_at|date:"M. j, Y, g:i a" }}</td>
+                            <td>{{ appt.ends_at|date:"M. j, Y, g:i a" }}</td>
+                            <td>{{ appt.reason|default:"—" }}</td>
+                            <td>
+                                <span class="status-pill status-{{ appt.status|lower }}">
+                                    {{ appt.get_status_display }}
+                                </span>
+                            </td>
+                            <td class="actions-cell">
+                                {% if appt.status == 'BOOKED' or appt.status == 'RESCHEDULED' %}
+                                    <a href="{% url 'reschedule_appointment' appt.pk %}" class="link-action">
+                                        Reschedule
+                                    </a>
+                                    <span class="action-divider">•</span>
+                                    <a href="{% url 'cancel_appointment' appt.pk %}" class="link-action link-danger">
+                                        Cancel
+                                    </a>
+                                {% else %}
+                                    <span class="muted">—</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+            <div class="empty-state">
+                <h3>No appointments yet</h3>
+                <p>
+                    When you book an appointment, it will appear here. You can get started by
+                    booking your first visit.
+                </p>
+                <a href="{% url 'book' %}" class="primary-btn">Book an appointment</a>
+            </div>
+        {% endif %}
+
+    </div>
 </div>
+
 {% endblock %}
+
 

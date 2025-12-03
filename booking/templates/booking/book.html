@@ -69,6 +69,9 @@
                             {{ form.starts_at.label }}:
                         </label>
                         {{ form.starts_at }}
+                        <small style="display:block; margin-top:4px; color:#666;">
+                            Use the picker to select date &amp; time in your local time zone.
+                        </small>
                         {% if form.starts_at.errors %}
                             <div style="color: #c62828; font-size: 13px; margin-top: 4px;">
                                 {{ form.starts_at.errors|striptags }}
@@ -82,6 +85,9 @@
                             {{ form.ends_at.label }}:
                         </label>
                         {{ form.ends_at }}
+                        <small style="display:block; margin-top:4px; color:#666;">
+                            Use the picker to select date &amp; time in your local time zone.
+                        </small>
                         {% if form.ends_at.errors %}
                             <div style="color: #c62828; font-size: 13px; margin-top: 4px;">
                                 {{ form.ends_at.errors|striptags }}
@@ -94,9 +100,7 @@
                         <label for="id_reason" style="font-weight: 600;">
                             Reason for appointment:
                         </label>
-
                         {{ form.reason }}
-
                         {% if form.reason.errors %}
                             <div style="color: #c62828; font-size: 13px; margin-top: 4px;">
                                 {{ form.reason.errors|striptags }}
@@ -161,3 +165,4 @@
 </div>
 
 {% endblock %}
+

@@ -1,45 +1,69 @@
 {% extends "booking/base.html" %}
 
+{% block title %}Provider View · Patient Scheduler{% endblock %}
+
 {% block content %}
-<h2>My Patient Appointments</h2>
+<div class="page-header">
+    <div>
+        <h2>My Patient Appointments</h2>
+        <p class="page-subtitle">
+            View upcoming and past visits that patients have booked with you.
+        </p>
+    </div>
+</div>
 
-{% if appts %}
-<table>
-    <tr>
-        <th>Patient</th>
-        <th>Starts</th>
-        <th>Ends</th>
-        <th>Reason</th>   {# <-- NEW COLUMN HEADER #}
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
-
-    {% for a in appts %}
-    <tr>
-        <td>{{ a.patient.username }}</td>
-        <td>{{ a.starts_at }}</td>
-        <td>{{ a.ends_at }}</td>
-
-        {# NEW: show the reason the patient entered #}
-        <td>
-            {{ a.reason|default:"—" }}
-        </td>
-
-        <td>{{ a.status }}</td>
-        <td>
-            {% if a.status != "CANCELED" %}
-                <a href="{% url 'provider_reschedule_appointment' a.pk %}">Reschedule</a> |
-                <a href="{% url 'provider_cancel_appointment' a.pk %}">Cancel</a>
-            {% else %}
-                —
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-{% else %}
-    <p>No appointments booked with you yet.</p>
-{% endif %}
-
+<div class="card">
+    {% if appts %}
+        <table class="appt-table">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Starts</th>
+                    <th>Ends</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th class="actions-col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in appts %}
+                    <tr class="{% if a.status == 'CANCELED' %}row-cancelled{% endif %}">
+                        <td>{{ a.patient.username }}</td>
+                        <td>{{ a.starts_at|date:"M. j, Y, g:i a" }}</td>
+                        <td>{{ a.ends_at|date:"M. j, Y, g:i a" }}</td>
+                        <td>{{ a.reason|default:"—" }}</td>
+                        <td>
+                            <span class="status-pill status-{{ a.status|lower }}">
+                                {{ a.get_status_display }}
+                            </span>
+                        </td>
+                        <td class="actions-cell">
+                            {% if a.status != "CANCELED" %}
+                                <a href="{% url 'provider_reschedule_appointment' a.pk %}" class="link-action">
+                                    Reschedule
+                                </a>
+                                <span class="action-divider">•</span>
+                                <a href="{% url 'provider_cancel_appointment' a.pk %}" class="link-action link-danger">
+                                    Cancel
+                                </a>
+                            {% else %}
+                                <span class="muted">—</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-state">
+            <h3>No appointments scheduled yet</h3>
+            <p>
+                When patients book visits with you, they will appear here. Share the system
+                with your patients so they can schedule their first appointment.
+            </p>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
+
 

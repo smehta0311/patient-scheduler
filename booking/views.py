@@ -23,12 +23,11 @@ def is_provider(user):
 
 @login_required
 def dashboard(request):
-    """
-    Simple dashboard for logged-in users.
-    Patients see links to book / my appointments.
-    Providers will also see a link to Provider Appointments in the nav.
-    """
-    return render(request, "booking/dashboard.html")
+    return render(
+        request,
+        "booking/dashboard.html",
+        {"is_provider": is_provider(request.user)},
+    )
 
 
 @login_required

@@ -1,74 +1,51 @@
 {% extends "booking/base.html" %}
+{% load static %}
+
+{% block title %}Dashboard · Patient Scheduler{% endblock %}
+
 {% block content %}
 
-<div style="max-width: 900px; margin: 0 auto;">
+<!-- Header ONLY -->
+<div class="page-header">
+    <div>
+        <h2>Welcome, {{ user.username }}</h2>
+        <p class="page-subtitle">
+            Manage your appointments or schedule a new visit.
+        </p>
+    </div>
+</div>
 
-    <h2 style="margin-bottom: 10px;">Welcome, {{ user.username }} 👋</h2>
-    <p style="color: #555; margin-bottom: 30px;">
-        Manage your appointments, book new ones, or review your schedule below.
+<!-- Main Dashboard Card -->
+<div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+    <h3 style="margin-top: 0; margin-bottom: 12px;">What would you like to do?</h3>
+    <p style="margin: 0 0 20px 0; color: #555;">
+        Choose an action below to book new appointments or manage existing ones.
     </p>
 
-    <!-- Card Container -->
-    <div style="
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
-        margin-top: 20px;
-    ">
+<div style="
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+">
+    <a href="{% url 'book' %}" class="primary-btn btn-blue">
+        Book Appointment
+    </a>
 
-        <!-- Card 1 -->
-        <div style="
-            background: #fff;
-            padding: 24px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        ">
-            <h3 style="margin-top: 0;">Book Appointment</h3>
-            <p style="color:#555;">
-                Schedule a new appointment with any available provider.
-            </p>
-            <a href="{% url 'book' %}" 
-               style="color: #2a4d8f; font-weight: bold;">Book now →</a>
-        </div>
+    <a href="{% url 'my_appointments' %}" class="primary-btn btn-lightblue">
+        View My Appointments
+    </a>
 
-        <!-- Card 2 -->
-        <div style="
-            background: #fff;
-            padding: 24px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        ">
-            <h3 style="margin-top: 0;">My Appointments</h3>
-            <p style="color:#555;">
-                View, cancel, or reschedule your current appointments.
-            </p>
-            <a href="{% url 'my_appointments' %}"
-               style="color: #2a4d8f; font-weight: bold;">View schedule →</a>
-        </div>
-
-        <!-- Card 3 (Providers) -->
-        {% if user.is_staff %}
-        <div style="
-            background: #fff;
-            padding: 24px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        ">
-            <h3 style="margin-top: 0;">Provider Dashboard</h3>
-            <p style="color:#555;">
-                View patients who have booked with you and manage appointments.
-            </p>
-            <a href="{% url 'provider_appointments' %}"
-               style="color: #2a4d8f; font-weight: bold;">Open dashboard →</a>
-        </div>
-        {% endif %}
-
+    {% if is_provider %}
+        <a href="{% url 'provider_appointments' %}" class="primary-btn btn-purple">
+            Provider View
+        </a>
+    {% endif %}
     </div>
-
 </div>
 
 {% endblock %}
-
 
 
 

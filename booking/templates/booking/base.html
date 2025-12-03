@@ -16,10 +16,16 @@
     <h1>Patient Scheduler</h1>
 
     <nav class="main-nav">
-    <a href="{% url 'dashboard' %}" class="nav-btn">Dashboard</a>
-    <a href="{% url 'book' %}" class="nav-btn">Book Appointment</a>
-    <a href="{% url 'my_appointments' %}" class="nav-btn">My Appointments</a>
-    <a href="{% url 'provider_appointments' %}" class="nav-btn">Provider View</a>
+    <a href="{% url 'dashboard' %}" class="nav-btn nav-blue">Dashboard</a>
+
+    <a href="{% url 'book' %}" class="nav-btn nav-blue">Book Appointment</a>
+
+    <a href="{% url 'my_appointments' %}" class="nav-btn nav-lightblue">My Appointments</a>
+
+    {% if is_provider %}
+    <a href="{% url 'provider_appointments' %}" class="nav-btn nav-purple">Provider View</a>
+    {% endif %}
+
 
 
     <form action="{% url 'logout' %}" method="post" class="logout-form">

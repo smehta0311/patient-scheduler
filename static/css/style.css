@@ -152,32 +152,37 @@ ul li {
 .main-nav {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
 }
 
-/* Generic nav buttons */
+/* Make nav links look like the big pill buttons */
 .nav-btn {
-    padding: 8px 14px;
-    border-radius: 20px;
-    background-color: transparent;
-    color: #2a4d8f;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background: #2a4d8f;
+    /* same family as your card buttons */
+    color: #ffffff;
     font-weight: 500;
-    text-decoration: none;
-    transition: 0.25s ease;
     font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.18);
+    transition: background 0.2s ease, transform 0.15s ease,
+        box-shadow 0.2s ease;
 }
 
-/* Hover effect */
 .nav-btn:hover {
-    background-color: #e9effc;
-    color: #1d3461;
+    background: #1f3b6d;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(15, 23, 42, 0.22);
 }
 
-/* Active page highlight (optional) */
+/* Optional: darker “current page” look if you want to add .active in templates */
 .nav-btn.active {
-    background-color: #d8e3ff;
-    font-weight: 600;
+    background: #182b4d;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.26);
 }
+
 
 /* Logout button: solid */
 .logout-btn {
@@ -393,4 +398,60 @@ ul li {
 /* Center text inside the current appointment bar */
 .current-appt {
     text-align: center;
+}
+
+/* ===== Colored Nav Buttons ===== */
+
+.nav-blue {
+    background-color: #2a4d8f;
+}
+
+.nav-blue:hover {
+    background-color: #1f3b6d;
+}
+
+.nav-lightblue {
+    background-color: #4b6cb7;
+}
+
+.nav-lightblue:hover {
+    background-color: #395599;
+}
+
+.nav-purple {
+    background-color: #6a3ea1;
+}
+
+.nav-purple:hover {
+    background-color: #512d7c;
+}
+
+/* Optional stronger shadow on hover */
+.nav-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(15, 23, 42, 0.22);
+}
+
+.btn-blue {
+    background-color: #2a4d8f;
+}
+
+.btn-blue:hover {
+    background-color: #1d3461;
+}
+
+.btn-lightblue {
+    background-color: #4b6cb7;
+}
+
+.btn-lightblue:hover {
+    background-color: #395599;
+}
+
+.btn-purple {
+    background-color: #6a3ea1;
+}
+
+.btn-purple:hover {
+    background-color: #512d7c;
 }
